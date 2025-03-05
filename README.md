@@ -1,4 +1,4 @@
-# Video Caption Studio
+# AyeAyeCaption - A Video Caption Studio
 
 ![Demo](https://via.placeholder.com/800x400) <!-- Replace with a GIF or screenshot of your app -->
 
