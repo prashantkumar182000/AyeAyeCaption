@@ -1,6 +1,6 @@
 # AyeAyeCaption - A Video Caption Studio
 
-![Sample](https://github.com/user-attachments/assets/dd131966-2297-4dc6-b8c5-432164eb3112) 
+https://github.com/user-attachments/assets/dd131966-2297-4dc6-b8c5-432164eb3112
 
 Video Caption Studio is a web application that allows users to add captions to videos. Users can load a video via a URL, add captions with precise timestamps, and export the captions as a `.vtt` file. The app supports both direct video files (e.g., `.mp4`, `.webm`) and embedded videos from platforms like YouTube and Vimeo.
 
