@@ -9,11 +9,9 @@ export default function TimestampInput({ label, value, onChange, sx }) {
   }, [value]);
 
   const validateAndFormat = (input) => {
-    // Remove all non-digit characters
     const numbers = input.replace(/[^0-9]/g, '');
     let formatted = '';
 
-    // Auto-format as HH:MM:SS
     if (numbers.length > 0) {
       const hours = numbers.slice(0, 2);
       const minutes = numbers.slice(2, 4);

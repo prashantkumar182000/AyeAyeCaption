@@ -8,7 +8,6 @@ export default function VideoPlayer({ src, captions }) {
   const [duration, setDuration] = useState(0);
   const videoRef = useRef(null);
 
-  // Generate WebVTT file with start and end times
   const generateVTT = () => {
     let vtt = 'WEBVTT\n\n';
     captions.forEach((caption) => {
@@ -18,7 +17,6 @@ export default function VideoPlayer({ src, captions }) {
     return URL.createObjectURL(new Blob([vtt], { type: 'text/vtt' }));
   };
 
-  // Caption synchronization logic
   useEffect(() => {
     if (!isEmbed && videoRef.current) {
       const track = videoRef.current.textTracks[0];
@@ -32,17 +30,14 @@ export default function VideoPlayer({ src, captions }) {
     }
   }, [isEmbed, captions]);
 
-  // Handle video time updates
   const handleTimeUpdate = (e) => {
     setCurrentTime(e.target.currentTime);
   };
 
-  // Handle video metadata load
   const handleLoadedMetadata = (e) => {
     setDuration(e.target.duration);
   };
 
-  // Handle slider seek
   const handleSeek = (_, value) => {
     if (videoRef.current) {
       videoRef.current.currentTime = value;

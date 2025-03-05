@@ -32,7 +32,6 @@ export default function Home() {
     try {
       const parsedUrl = new URL(url);
 
-      // YouTube
       if (parsedUrl.hostname.includes('youtube.com') || parsedUrl.hostname.includes('youtu.be')) {
         const videoId = parsedUrl.pathname.includes('/v/')
           ? parsedUrl.pathname.split('/v/')[1]
@@ -42,7 +41,6 @@ export default function Home() {
         }
       }
 
-      // Vimeo
       if (parsedUrl.hostname.includes('vimeo.com')) {
         const videoId = parsedUrl.pathname.split('/').pop();
         if (videoId && videoId.match(/^\d+$/)) {
@@ -50,7 +48,6 @@ export default function Home() {
         }
       }
 
-      // Dailymotion
       if (parsedUrl.hostname.includes('dailymotion.com') || parsedUrl.hostname.includes('dai.ly')) {
         const videoId = parsedUrl.pathname.includes('/video/')
           ? parsedUrl.pathname.split('/video/')[1]
@@ -60,7 +57,6 @@ export default function Home() {
         }
       }
 
-      // Twitch
       if (parsedUrl.hostname.includes('twitch.tv')) {
         const videoId = parsedUrl.pathname.split('/videos/')[1];
         if (videoId && videoId.match(/^\d+$/)) {
@@ -68,7 +64,6 @@ export default function Home() {
         }
       }
 
-      // Facebook
       if (parsedUrl.hostname.includes('facebook.com') || parsedUrl.hostname.includes('fb.watch')) {
         const videoId = parsedUrl.pathname.split('/videos/')[1] || parsedUrl.pathname.split('/')[2];
         if (videoId && videoId.match(/^\d+$/)) {
@@ -76,7 +71,6 @@ export default function Home() {
         }
       }
 
-      // Direct video links (mp4, webm, ogg, etc.)
       if (parsedUrl.pathname.match(/\.(mp4|webm|ogg|mov|avi|mkv)$/i)) {
         return url;
       }
@@ -109,7 +103,6 @@ export default function Home() {
   };
 
   const handleExportCaptions = () => {
-    // Sort captions by startTime before exporting
     const sortedCaptions = [...captions].sort((a, b) => {
       const timeA = new Date(`1970-01-01T${a.startTime}Z`).getTime();
       const timeB = new Date(`1970-01-01T${b.startTime}Z`).getTime();
@@ -130,7 +123,6 @@ export default function Home() {
     URL.revokeObjectURL(url);
   };
 
-  // Sort captions by startTime before rendering
   const sortedCaptions = [...captions].sort((a, b) => {
     const timeA = new Date(`1970-01-01T${a.startTime}Z`).getTime();
     const timeB = new Date(`1970-01-01T${b.startTime}Z`).getTime();
@@ -139,7 +131,6 @@ export default function Home() {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      {/* Header */}
       <Typography
         variant="h3"
         component="h1"
@@ -156,7 +147,6 @@ export default function Home() {
         Video Caption Studio
       </Typography>
 
-      {/* Video URL Input */}
       <Paper elevation={3} sx={{ p: 3, mb: 4, borderRadius: '12px' }}>
         <Box component="form" onSubmit={handleUrlSubmit} sx={{ display: 'flex', gap: 2 }}>
           <TextField
@@ -173,14 +163,12 @@ export default function Home() {
         </Box>
       </Paper>
 
-      {/* Error Snackbar */}
       <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')}>
         <Alert onClose={() => setError('')} severity="error" sx={{ width: '100%' }}>
           {error}
         </Alert>
       </Snackbar>
 
-      {/* Video Player */}
       {videoUrl ? (
         <Fade in={!!videoUrl} timeout={500}>
           <Box sx={{ mb: 4 }}>
@@ -193,14 +181,12 @@ export default function Home() {
         </Typography>
       )}
 
-      {/* Caption Form */}
       {videoUrl && (
         <Paper elevation={3} sx={{ p: 3, mb: 4, borderRadius: '12px' }}>
           <CaptionForm editIndex={editIndex} setEditIndex={setEditIndex} />
         </Paper>
       )}
 
-      {/* Captions List */}
       {videoUrl && sortedCaptions.length > 0 && (
         <Paper elevation={3} sx={{ p: 3, borderRadius: '12px' }}>
           <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
